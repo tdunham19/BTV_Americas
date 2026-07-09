@@ -4,6 +4,7 @@
 # Americas Region Categories: Inside USA & Outside USA
 # n = 163 (removed samples causing polytomies)
 # TD 01.08.26
+# TD 06.23.26 Repeated with trees made with bootstrapping
 #######################################################
 
 # load required libraries
@@ -26,7 +27,7 @@ library(corHMM)
 # plot base tree
 #######################################################
 # read in tree
-s1.tree<-read.nexus(file="BTV_Americas_s1_no_poly_aln_midpoint_rooted_nexus.tre")
+s1.tree<-read.nexus(file="BTV_Americas_s1_no_poly_aln_midpoint_rooted_nexus_REPEAT.tre")
 s1.tree
 
 # read in metadata
@@ -80,9 +81,9 @@ legend("topleft",
 # s1.ard<-fitMk(s1.tree,s1.trait,model="ARD")
 # s1.ard
 # save the object
-# saveRDS(s1.ard, file = "s1_americas_ARD_NoPoly_2Regions_010826.rds")
+# saveRDS(s1.ard, file = "s1_americas_ARD_NoPoly_2Regions_062526.rds")
 # restore the object
-s1.ard <- readRDS("s1_americas_ARD_NoPoly_2Regions_010826.rds")
+s1.ard <- readRDS("s1_americas_ARD_NoPoly_2Regions_062526.rds")
 
 # fit other models
 
@@ -90,17 +91,17 @@ s1.ard <- readRDS("s1_americas_ARD_NoPoly_2Regions_010826.rds")
 # s1.sym<-fitMk(s1.tree,s1.trait,model="SYM")
 # s1.sym
 # save the object
-# saveRDS(s1.sym, file = "s1_americas_SYM_NoPoly_2Regions_010826.rds")
+# saveRDS(s1.sym, file = "s1_americas_SYM_NoPoly_2Regions_062526.rds")
 # restore the object
-s1.sym <- readRDS("s1_americas_SYM_NoPoly_2Regions_010826.rds")
+s1.sym <- readRDS("s1_americas_SYM_NoPoly_2Regions_062526.rds")
 
 ### ER
 # s1.er<-fitMk(s1.tree,s1.trait,model="ER")
 # s1.er
 # save the object
-# saveRDS(s1.er, file = "s1_americas_ER_NoPoly_2Regions_010826.rds")
+# saveRDS(s1.er, file = "s1_americas_ER_NoPoly_2Regions_062526.rds")
 # restore the object
-s1.er <- readRDS("s1_americas_ER_NoPoly_2Regions_010826.rds")
+s1.er <- readRDS("s1_americas_ER_NoPoly_2Regions_062526.rds")
 
 # compare models 
 data.frame(transition_model=c("ARD","SYM","ER"),
@@ -145,7 +146,7 @@ Q <- as.Qmatrix(s1.ard)
 rownames(Q)
 colnames(Q)
 Q
-# write.csv(Q, file = "s1_QMatrix_americas_ARD_NoPoly_2Regions_010826.csv", row.names = TRUE)
+# write.csv(Q, file = "s1_QMatrix_americas_ARD_NoPoly_2Regions_062526.csv", row.names = TRUE)
 #######################################################
 
 # Plot Marginal ASR
@@ -162,7 +163,7 @@ plot(s1_marginal,
 lastPP <- get("last_plot.phylo", envir = .PlotPhyloEnv)
 add.scale.bar(x = lastPP$x.lim[1] + 0.05 * diff(lastPP$x.lim), 
               y = lastPP$y.lim[1] - 0.02 * diff(lastPP$y.lim),
-              length = 0.1, lwd = 2, cex = 0.8)
+              length = 0.05, lwd = 2, cex = 0.8)
 my_legend_order <- c("Outside USA", "USA")
 legend_colors <- cols[my_legend_order]
 legend("topleft",
@@ -291,9 +292,9 @@ legend("topleft",
 # s2.ard<-fitMk(s2.tree,s2.trait,model="ARD")
 # s2.ard
 # save the object
-# saveRDS(s2.ard, file = "s2_americas_ARD_NoPoly_2Regions_010826.rds")
+# saveRDS(s2.ard, file = "s2_americas_ARD_NoPoly_2Regions_062326.rds")
 # restore the object
-s2.ard <- readRDS("s2_americas_ARD_NoPoly_2Regions_010826.rds")
+s2.ard <- readRDS("s2_americas_ARD_NoPoly_2Regions_062326.rds")
 
 # fit other models
 
@@ -301,17 +302,17 @@ s2.ard <- readRDS("s2_americas_ARD_NoPoly_2Regions_010826.rds")
 # s2.sym<-fitMk(s2.tree,s2.trait,model="SYM")
 # s2.sym
 # save the object
-# saveRDS(s2.sym, file = "s2_americas_SYM_NoPoly_2Regions_010826.rds")
+# saveRDS(s2.sym, file = "s2_americas_SYM_NoPoly_2Regions_062326.rds")
 # restore the object
-s2.sym <- readRDS("s2_americas_SYM_NoPoly_2Regions_010826.rds")
+s2.sym <- readRDS("s2_americas_SYM_NoPoly_2Regions_062326.rds")
 
 ### ER
 # s2.er<-fitMk(s2.tree,s2.trait,model="ER")
 # s2.er
 # save the object
-# saveRDS(s2.er, file = "s2_americas_ER_NoPoly_2Regions_010826.rds")
+# saveRDS(s2.er, file = "s2_americas_ER_NoPoly_2Regions_062326.rds")
 # restore the object
-s2.er <- readRDS("s2_americas_ER_NoPoly_2Regions_010826.rds")
+s2.er <- readRDS("s2_americas_ER_NoPoly_2Regions_062326.rds")
 
 # compare models 
 data.frame(transition_model=c("ARD","SYM","ER"),
@@ -353,7 +354,7 @@ Q <- as.Qmatrix(s2.ard)
 rownames(Q)
 colnames(Q)
 Q
-# write.csv(Q, file = "s2_QMatrix_americas_ARD_NoPoly_2Regions_010826.csv", row.names = TRUE)
+# write.csv(Q, file = "s2_QMatrix_americas_ARD_NoPoly_2Regions_062326.csv", row.names = TRUE)
 #######################################################
 
 # Plot Marginal ASR
@@ -399,7 +400,7 @@ add.scale.bar(x = lastPP$x.lim[1] + 0.05 * diff(lastPP$x.lim),
               length = 0.05, lwd = 2, cex = 0.8)
 my_legend_order <- c("Outside USA", "USA")
 legend_colors <- cols[my_legend_order]
-legend("topleft",
+legend("bottomright",
        legend = my_legend_order,
        pch = 16, col = as.vector(legend_colors),
        horiz = FALSE, cex = 0.8, bty = "n", pt.cex = 2,
@@ -445,7 +446,7 @@ cols
 # plot base tree
 #######################################################
 # read in tree
-s3.tree<-read.nexus(file="BTV_Americas_s3_no_poly_aln_midpoint_rooted_nexus.tre")
+s3.tree<-read.nexus(file="BTV_Americas_s3_no_poly_aln_midpoint_rooted_nexus_REPEAT.tre")
 s3.tree
 
 # read in metadata
@@ -499,9 +500,9 @@ legend("bottomleft",
 # s3.ard<-fitMk(s3.tree,s3.trait,model="ARD")
 # s3.ard
 # save the object
-# saveRDS(s3.ard, file = "s3_americas_ARD_NoPoly_2Regions_010826.rds")
+# saveRDS(s3.ard, file = "s3_americas_ARD_NoPoly_2Regions_062526.rds")
 # restore the object
-s3.ard <- readRDS("s3_americas_ARD_NoPoly_2Regions_010826.rds")
+s3.ard <- readRDS("s3_americas_ARD_NoPoly_2Regions_062526.rds")
 
 # fit other models
 
@@ -509,17 +510,17 @@ s3.ard <- readRDS("s3_americas_ARD_NoPoly_2Regions_010826.rds")
 # s3.sym<-fitMk(s3.tree,s3.trait,model="SYM")
 # s3.sym
 # save the object
-# saveRDS(s3.sym, file = "s3_americas_SYM_NoPoly_2Regions_010826.rds")
+# saveRDS(s3.sym, file = "s3_americas_SYM_NoPoly_2Regions_062526.rds")
 # restore the object
-s3.sym <- readRDS("s3_americas_SYM_NoPoly_2Regions_010826.rds")
+s3.sym <- readRDS("s3_americas_SYM_NoPoly_2Regions_062526.rds")
 
 ### ER
 # s3.er<-fitMk(s3.tree,s3.trait,model="ER")
 # s3.er
 # save the object
-# saveRDS(s3.er, file = "s3_americas_ER_NoPoly_2Regions_010826.rds")
+# saveRDS(s3.er, file = "s3_americas_ER_NoPoly_2Regions_062526.rds")
 # restore the object
-s3.er <- readRDS("s3_americas_ER_NoPoly_2Regions_010826.rds")
+s3.er <- readRDS("s3_americas_ER_NoPoly_2Regions_062526.rds")
 
 # compare models 
 data.frame(transition_model=c("ARD","SYM","ER"),
@@ -564,7 +565,7 @@ Q <- as.Qmatrix(s3.ard)
 rownames(Q)
 colnames(Q)
 Q
-# write.csv(Q, file = "s3_QMatrix_americas_ARD_NoPoly_2Regions_010826.csv", row.names = TRUE)
+# write.csv(Q, file = "s3_QMatrix_americas_ARD_NoPoly_2Regions_062526.csv", row.names = TRUE)
 #######################################################
 
 # Plot Marginal ASR
@@ -710,9 +711,9 @@ legend("bottomleft",
 # s4.ard<-fitMk(s4.tree,s4.trait,model="ARD")
 # s4.ard
 # save the object
-# saveRDS(s4.ard, file = "s4_americas_ARD_NoPoly_2Regions_010826.rds")
+# saveRDS(s4.ard, file = "s4_americas_ARD_NoPoly_2Regions_062326.rds")
 # restore the object
-s4.ard <- readRDS("s4_americas_ARD_NoPoly_2Regions_010826.rds")
+s4.ard <- readRDS("s4_americas_ARD_NoPoly_2Regions_062326.rds")
 
 # fit other models
 
@@ -720,17 +721,17 @@ s4.ard <- readRDS("s4_americas_ARD_NoPoly_2Regions_010826.rds")
 # s4.sym<-fitMk(s4.tree,s4.trait,model="SYM")
 # s4.sym
 # save the object
-# saveRDS(s4.sym, file = "s4_americas_SYM_NoPoly_2Regions_010826.rds")
+# saveRDS(s4.sym, file = "s4_americas_SYM_NoPoly_2Regions_062326.rds")
 # restore the object
-s4.sym <- readRDS("s4_americas_SYM_NoPoly_2Regions_010826.rds")
+s4.sym <- readRDS("s4_americas_SYM_NoPoly_2Regions_062326.rds")
 
 ### ER
 # s4.er<-fitMk(s4.tree,s4.trait,model="ER")
 # s4.er
 # save the object
-# saveRDS(s4.er, file = "s4_americas_ER_NoPoly_2Regions_010826.rds")
+# saveRDS(s4.er, file = "s4_americas_ER_NoPoly_2Regions_062326.rds")
 # restore the object
-s4.er <- readRDS("s4_americas_ER_NoPoly_2Regions_010826.rds")
+s4.er <- readRDS("s4_americas_ER_NoPoly_2Regions_062326.rds")
 
 # compare models 
 data.frame(transition_model=c("ARD","SYM","ER"),
@@ -775,7 +776,7 @@ Q <- as.Qmatrix(s4.ard)
 rownames(Q)
 colnames(Q)
 Q
-# write.csv(Q, file = "s4_QMatrix_americas_ARD_NoPoly_2Regions_010826.csv", row.names = TRUE)
+# write.csv(Q, file = "s4_QMatrix_americas_ARD_NoPoly_2Regions_062326.csv", row.names = TRUE)
 #######################################################
 
 # Plot Marginal ASR
@@ -867,7 +868,7 @@ cols
 # plot base tree
 #######################################################
 # read in tree
-s5.tree<-read.nexus(file="BTV_Americas_s5_no_poly_aln_midpoint_rooted_nexus.tre")
+s5.tree<-read.nexus(file="BTV_Americas_s5_no_poly_aln_midpoint_rooted_nexus_REPEAT.tre")
 s5.tree
 
 # read in metadata
@@ -921,9 +922,9 @@ legend("topleft",
 # s5.ard<-fitMk(s5.tree,s5.trait,model="ARD")
 # s5.ard
 # save the object
-# saveRDS(s5.ard, file = "s5_americas_ARD_NoPoly_2Regions_010826.rds")
+# saveRDS(s5.ard, file = "s5_americas_ARD_NoPoly_2Regions_062526.rds")
 # restore the object
-s5.ard <- readRDS("s5_americas_ARD_NoPoly_2Regions_010826.rds")
+s5.ard <- readRDS("s5_americas_ARD_NoPoly_2Regions_062526.rds")
 
 # fit other models
 
@@ -931,17 +932,17 @@ s5.ard <- readRDS("s5_americas_ARD_NoPoly_2Regions_010826.rds")
 # s5.sym<-fitMk(s5.tree,s5.trait,model="SYM")
 # s5.sym
 # save the object
-# saveRDS(s5.sym, file = "s5_americas_SYM_NoPoly_2Regions_010826.rds")
+# saveRDS(s5.sym, file = "s5_americas_SYM_NoPoly_2Regions_062526.rds")
 # restore the object
-s5.sym <- readRDS("s5_americas_SYM_NoPoly_2Regions_010826.rds")
+s5.sym <- readRDS("s5_americas_SYM_NoPoly_2Regions_062526.rds")
 
 ### ER
 # s5.er<-fitMk(s5.tree,s5.trait,model="ER")
 # s5.er
 # save the object
-# saveRDS(s5.er, file = "s5_americas_ER_NoPoly_2Regions_010826.rds")
+# saveRDS(s5.er, file = "s5_americas_ER_NoPoly_2Regions_062526.rds")
 # restore the object
-s5.er <- readRDS("s5_americas_ER_NoPoly_2Regions_010826.rds")
+s5.er <- readRDS("s5_americas_ER_NoPoly_2Regions_062526.rds")
 
 # compare models 
 data.frame(transition_model=c("ARD","SYM","ER"),
@@ -984,7 +985,7 @@ Q <- as.Qmatrix(s5.ard)
 rownames(Q)
 colnames(Q)
 Q
-# write.csv(Q, file = "s5_QMatrix_americas_ARD_NoPoly_2Regions_010826.csv", row.names = TRUE)
+# write.csv(Q, file = "s5_QMatrix_americas_ARD_NoPoly_2Regions_062526.csv", row.names = TRUE)
 #######################################################
 
 # Plot Marginal ASR
@@ -1030,7 +1031,7 @@ add.scale.bar(x = lastPP$x.lim[1] + 0.05 * diff(lastPP$x.lim),
               length = 0.05, lwd = 2, cex = 0.8)
 my_legend_order <- c("Outside USA", "USA")
 legend_colors <- cols[my_legend_order]
-legend("topleft",
+legend("topright",
        legend = my_legend_order,
        pch = 16, col = as.vector(legend_colors),
        horiz = FALSE, cex = 0.8, bty = "n", pt.cex = 2,
@@ -1130,9 +1131,9 @@ legend("bottomleft",
 # s6.ard<-fitMk(s6.tree,s6.trait,model="ARD")
 # s6.ard
 # save the object
-# saveRDS(s6.ard, file = "s6_americas_ARD_NoPoly_2Regions_010826.rds")
+# saveRDS(s6.ard, file = "s6_americas_ARD_NoPoly_2Regions_062326.rds")
 # restore the object
-s6.ard <- readRDS("s6_americas_ARD_NoPoly_2Regions_010826.rds")
+s6.ard <- readRDS("s6_americas_ARD_NoPoly_2Regions_062326.rds")
 
 # fit other models
 
@@ -1140,17 +1141,17 @@ s6.ard <- readRDS("s6_americas_ARD_NoPoly_2Regions_010826.rds")
 # s6.sym<-fitMk(s6.tree,s6.trait,model="SYM")
 # s6.sym
 # save the object
-# saveRDS(s6.sym, file = "s6_americas_SYM_NoPoly_2Regions_010826.rds")
+# saveRDS(s6.sym, file = "s6_americas_SYM_NoPoly_2Regions_062326.rds")
 # restore the object
-s6.sym <- readRDS("s6_americas_SYM_NoPoly_2Regions_010826.rds")
+s6.sym <- readRDS("s6_americas_SYM_NoPoly_2Regions_062326.rds")
 
 ### ER
 # s6.er<-fitMk(s6.tree,s6.trait,model="ER")
 # s6.er
 # save the object
-# saveRDS(s6.er, file = "s6_americas_ER_NoPoly_2Regions_010826.rds")
+# saveRDS(s6.er, file = "s6_americas_ER_NoPoly_2Regions_062326.rds")
 # restore the object
-s6.er <- readRDS("s6_americas_ER_NoPoly_2Regions_010826.rds")
+s6.er <- readRDS("s6_americas_ER_NoPoly_2Regions_062326.rds")
 
 # compare models 
 data.frame(transition_model=c("ARD","SYM","ER"),
@@ -1193,7 +1194,7 @@ Q <- as.Qmatrix(s6.ard)
 rownames(Q)
 colnames(Q)
 Q
-# write.csv(Q, file = "s6_QMatrix_americas_ARD_NoPoly_2Regions_010826.csv", row.names = TRUE)
+# write.csv(Q, file = "s6_QMatrix_americas_ARD_NoPoly_2Regions_062326.csv", row.names = TRUE)
 #######################################################
 
 # Plot Marginal ASR
@@ -1339,9 +1340,9 @@ legend("bottomleft",
 # s7.ard<-fitMk(s7.tree,s7.trait,model="ARD")
 # s7.ard
 # save the object
-# saveRDS(s7.ard, file = "s7_americas_ARD_NoPoly_2Regions_010826.rds")
+# saveRDS(s7.ard, file = "s7_americas_ARD_NoPoly_2Regions_062326.rds")
 # restore the object
-s7.ard <- readRDS("s7_americas_ARD_NoPoly_2Regions_010826.rds")
+s7.ard <- readRDS("s7_americas_ARD_NoPoly_2Regions_062326.rds")
 
 # fit other models
 
@@ -1349,17 +1350,17 @@ s7.ard <- readRDS("s7_americas_ARD_NoPoly_2Regions_010826.rds")
 # s7.sym<-fitMk(s7.tree,s7.trait,model="SYM")
 # s7.sym
 # save the object
-# saveRDS(s7.sym, file = "s7_americas_SYM_NoPoly_2Regions_010826.rds")
+# saveRDS(s7.sym, file = "s7_americas_SYM_NoPoly_2Regions_062326.rds")
 # restore the object
-s7.sym <- readRDS("s7_americas_SYM_NoPoly_2Regions_010826.rds")
+s7.sym <- readRDS("s7_americas_SYM_NoPoly_2Regions_062326.rds")
 
 ### ER
 # s7.er<-fitMk(s7.tree,s7.trait,model="ER")
 # s7.er
 # save the object
-# saveRDS(s7.er, file = "s7_americas_ER_NoPoly_2Regions_010826.rds")
+# saveRDS(s7.er, file = "s7_americas_ER_NoPoly_2Regions_062326.rds")
 # restore the object
-s7.er <- readRDS("s7_americas_ER_NoPoly_2Regions_010826.rds")
+s7.er <- readRDS("s7_americas_ER_NoPoly_2Regions_062326.rds")
 
 # compare models 
 data.frame(transition_model=c("ARD","SYM","ER"),
@@ -1401,7 +1402,7 @@ Q <- as.Qmatrix(s7.ard)
 rownames(Q)
 colnames(Q)
 Q
-# write.csv(Q, file = "s7_QMatrix_americas_ARD_NoPoly_2Regions_010826.csv", row.names = TRUE)
+# write.csv(Q, file = "s7_QMatrix_americas_ARD_NoPoly_2Regions_062326.csv", row.names = TRUE)
 #######################################################
 
 # Plot Marginal ASR
@@ -1550,9 +1551,9 @@ legend("topleft",
 # s8.ard<-fitMk(s8.tree,s8.trait,model="ARD")
 # s8.ard
 # save the object
-# saveRDS(s8.ard, file = "s8_americas_ARD_NoPoly_2Regions_010826.rds")
+# saveRDS(s8.ard, file = "s8_americas_ARD_NoPoly_2Regions_062326.rds")
 # restore the object
-s8.ard <- readRDS("s8_americas_ARD_NoPoly_2Regions_010826.rds")
+s8.ard <- readRDS("s8_americas_ARD_NoPoly_2Regions_062326.rds")
 
 # fit other models
 
@@ -1560,17 +1561,17 @@ s8.ard <- readRDS("s8_americas_ARD_NoPoly_2Regions_010826.rds")
 # s8.sym<-fitMk(s8.tree,s8.trait,model="SYM")
 # s8.sym
 # save the object
-# saveRDS(s8.sym, file = "s8_americas_SYM_NoPoly_2Regions_010826.rds")
+# saveRDS(s8.sym, file = "s8_americas_SYM_NoPoly_2Regions_062326.rds")
 # restore the object
-s8.sym <- readRDS("s8_americas_SYM_NoPoly_2Regions_010826.rds")
+s8.sym <- readRDS("s8_americas_SYM_NoPoly_2Regions_062326.rds")
 
 ### ER
 # s8.er<-fitMk(s8.tree,s8.trait,model="ER")
 # s8.er
 # save the object
-# saveRDS(s8.er, file = "s8_americas_ER_NoPoly_2Regions_010826.rds")
+# saveRDS(s8.er, file = "s8_americas_ER_NoPoly_2Regions_062326.rds")
 # restore the object
-s8.er <- readRDS("s8_americas_ER_NoPoly_2Regions_010826.rds")
+s8.er <- readRDS("s8_americas_ER_NoPoly_2Regions_062326.rds")
 
 # compare models 
 data.frame(transition_model=c("ARD","SYM","ER"),
@@ -1617,7 +1618,7 @@ Q <- as.Qmatrix(s8.ard)
 rownames(Q)
 colnames(Q)
 Q
-# write.csv(Q, file = "s8_QMatrix_americas_ARD_NoPoly_2Regions_010826.csv", row.names = TRUE)
+# write.csv(Q, file = "s8_QMatrix_americas_ARD_NoPoly_2Regions_062326.csv", row.names = TRUE)
 #######################################################
 
 # Plot Marginal ASR
@@ -1766,9 +1767,9 @@ legend("topleft",
 # s9.ard<-fitMk(s9.tree,s9.trait,model="ARD")
 # s9.ard
 # save the object
-# saveRDS(s9.ard, file = "s9_americas_ARD_NoPoly_2Regions_010826.rds")
+# saveRDS(s9.ard, file = "s9_americas_ARD_NoPoly_2Regions_062326.rds")
 # restore the object
-s9.ard <- readRDS("s9_americas_ARD_NoPoly_2Regions_010826.rds")
+s9.ard <- readRDS("s9_americas_ARD_NoPoly_2Regions_062326.rds")
 
 # fit other models
 
@@ -1776,17 +1777,17 @@ s9.ard <- readRDS("s9_americas_ARD_NoPoly_2Regions_010826.rds")
 # s9.sym<-fitMk(s9.tree,s9.trait,model="SYM")
 # s9.sym
 # save the object
-# saveRDS(s9.sym, file = "s9_americas_SYM_NoPoly_2Regions_010826.rds")
+# saveRDS(s9.sym, file = "s9_americas_SYM_NoPoly_2Regions_062326.rds")
 # restore the object
-s9.sym <- readRDS("s9_americas_SYM_NoPoly_2Regions_010826.rds")
+s9.sym <- readRDS("s9_americas_SYM_NoPoly_2Regions_062326.rds")
 
 ### ER
 # s9.er<-fitMk(s9.tree,s9.trait,model="ER")
 # s9.er
 # save the object
-# saveRDS(s9.er, file = "s9_americas_ER_NoPoly_2Regions_010826.rds")
+# saveRDS(s9.er, file = "s9_americas_ER_NoPoly_2Regions_062326.rds")
 # restore the object
-s9.er <- readRDS("s9_americas_ER_NoPoly_2Regions_010826.rds")
+s9.er <- readRDS("s9_americas_ER_NoPoly_2Regions_062326.rds")
 
 # compare models 
 data.frame(transition_model=c("ARD","SYM","ER"),
@@ -1833,7 +1834,7 @@ Q <- as.Qmatrix(s9.ard)
 rownames(Q)
 colnames(Q)
 Q
-# write.csv(Q, file = "s9_QMatrix_americas_ARD_NoPoly_2Regions_010826.csv", row.names = TRUE)
+# write.csv(Q, file = "s9_QMatrix_americas_ARD_NoPoly_2Regions_062326.csv", row.names = TRUE)
 #######################################################
 
 # Plot Marginal ASR
@@ -1983,9 +1984,9 @@ legend("left",
 # s10.ard<-fitMk(s10.tree,s10.trait,model="ARD")
 # s10.ard
 # save the object
-# saveRDS(s10.ard, file = "s10_americas_ARD_NoPoly_2Regions_010826.rds")
+# saveRDS(s10.ard, file = "s10_americas_ARD_NoPoly_2Regions_062326.rds")
 # restore the object
-s10.ard <- readRDS("s10_americas_ARD_NoPoly_2Regions_010826.rds")
+s10.ard <- readRDS("s10_americas_ARD_NoPoly_2Regions_062326.rds")
 
 # fit other models
 
@@ -1993,17 +1994,17 @@ s10.ard <- readRDS("s10_americas_ARD_NoPoly_2Regions_010826.rds")
 # s10.sym<-fitMk(s10.tree,s10.trait,model="SYM")
 # s10.sym
 # save the object
-# saveRDS(s10.sym, file = "s10_americas_SYM_NoPoly_2Regions_010826.rds")
+# saveRDS(s10.sym, file = "s10_americas_SYM_NoPoly_2Regions_062326.rds")
 # restore the object
-s10.sym <- readRDS("s10_americas_SYM_NoPoly_2Regions_010826.rds")
+s10.sym <- readRDS("s10_americas_SYM_NoPoly_2Regions_062326.rds")
 
 ### ER
 # s10.er<-fitMk(s10.tree,s10.trait,model="ER")
 # s10.er
 # save the object
-# saveRDS(s10.er, file = "s10_americas_ER_NoPoly_2Regions_010826.rds")
+# saveRDS(s10.er, file = "s10_americas_ER_NoPoly_2Regions_062326.rds")
 # restore the object
-s10.er <- readRDS("s10_americas_ER_NoPoly_2Regions_010826.rds")
+s10.er <- readRDS("s10_americas_ER_NoPoly_2Regions_062326.rds")
 
 # compare models 
 data.frame(transition_model=c("ARD","SYM","ER"),
@@ -2050,7 +2051,7 @@ Q <- as.Qmatrix(s10.ard)
 rownames(Q)
 colnames(Q)
 Q
-# write.csv(Q, file = "s10_QMatrix_americas_ARD_NoPoly_2Regions_010826.csv", row.names = TRUE)
+# write.csv(Q, file = "s10_QMatrix_americas_ARD_NoPoly_2Regions_062326.csv", row.names = TRUE)
 #######################################################
 
 # Plot Marginal ASR
@@ -2096,7 +2097,7 @@ add.scale.bar(x = lastPP$x.lim[1] + 0.05 * diff(lastPP$x.lim),
               length = 0.05, lwd = 2, cex = 0.8)
 my_legend_order <- c("Outside USA", "USA")
 legend_colors <- cols[my_legend_order]
-legend("bottomright",
+legend("topleft",
        legend = my_legend_order,
        pch = 16, col = as.vector(legend_colors),
        horiz = FALSE, cex = 0.8, bty = "n", pt.cex = 2,
