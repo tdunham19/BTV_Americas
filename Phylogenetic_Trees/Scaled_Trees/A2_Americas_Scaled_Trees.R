@@ -15,11 +15,11 @@ library(tidyverse)
 # plot tree
 #######################################################
 # read in tree
-s1.tree<-read.nexus(file="../../ASR/Americas/BTV_Americas_s1_no_poly_aln_midpoint_rooted_nexus.tre")
+s1.tree<-read.nexus(file="BTV_Americas_s1_aln_midpoint_root_nexus_REPEAT.tre")
 s1.tree
 
 # read in metadata
-s1.data<-read.csv(file="../../ASR/Americas/A2_Americas_Metadata_No_Polytomy.csv", row.names=1)
+s1.data<-read.csv(file="AIM2_Metadata_Nextstrain_renamed_traits_Americas_2_regions.csv", row.names=1)
 
 # keep only the tips that are found in the tree
 s1.data.subset <- s1.data %>%
@@ -67,11 +67,11 @@ my_legend_order <- c("Outside USA", "USA")
 # plot tree
 #######################################################
 # read in tree
-s2.tree<-read.nexus(file="../../ASR/Americas/BTV_Americas_s2_no_poly_aln_midpoint_rooted_nexus.tre")
+s2.tree<-read.nexus(file="BTV_Americas_s2_aln_midpoint_root_nexus.tre")
 s2.tree
 
 # read in metadata
-s2.data<-read.csv(file="../../ASR/Americas/A2_Americas_Metadata_No_Polytomy.csv", row.names=1)
+s2.data<-read.csv(file="AIM2_Metadata_Nextstrain_renamed_traits_Americas_2_regions.csv", row.names=1)
 
 # keep only the tips that are found in the tree
 s2.data.subset <- s2.data %>%
@@ -86,7 +86,9 @@ s2.trait <- setNames(s2.data.subset[,"trait"], rownames(s2.data.subset))
 unique(s2.trait)
 
 # plotTree(s2.tree,ftype="off",lwd=1,type="phylogram",offset = 0.03,fsize=0.3,x.lim = c(0,20))
+s2.tree <- ladderize(s2.tree, right = FALSE)
 plot(s2.tree, x.lim = c(0.1,5.75),show.tip.label = FALSE)
+
 add.scale.bar(x = 0, y = -2, cex = 0.5)
 X<-strsplit(setNames(as.character(s2.trait),names(s2.trait)),"+",
             fixed=TRUE)
@@ -119,11 +121,11 @@ legend("topleft",
 # plot tree
 #######################################################
 # read in tree
-s3.tree<-read.nexus(file="../../ASR/Americas/BTV_Americas_s3_no_poly_aln_midpoint_rooted_nexus.tre")
+s3.tree<-read.nexus(file="BTV_Americas_s3_aln_midpoint_root_nexus_REPEAT.tre")
 s3.tree
 
 # read in metadata
-s3.data<-read.csv(file="../../ASR/Americas/A2_Americas_Metadata_No_Polytomy.csv", row.names=1)
+s3.data<-read.csv(file="AIM2_Metadata_Nextstrain_renamed_traits_Americas_2_regions.csv", row.names=1)
 
 # keep only the tips that are found in the tree
 s3.data.subset <- s3.data %>%
@@ -171,11 +173,11 @@ my_legend_order <- c("Outside USA", "USA")
 # plot tree
 #######################################################
 # read in tree
-s4.tree<-read.nexus(file="../../ASR/Americas/BTV_Americas_s4_no_poly_aln_midpoint_rooted_nexus.tre")
+s4.tree<-read.nexus(file="BTV_Americas_s4_aln_midpoint_root_nexus.tre")
 s4.tree
 
 # read in metadata
-s4.data<-read.csv(file="../../ASR/Americas/A2_Americas_Metadata_No_Polytomy.csv", row.names=1)
+s4.data<-read.csv(file="AIM2_Metadata_Nextstrain_renamed_traits_Americas_2_regions.csv", row.names=1)
 
 # keep only the tips that are found in the tree
 s4.data.subset <- s4.data %>%
@@ -223,11 +225,11 @@ my_legend_order <- c("Outside USA", "USA")
 # plot tree
 #######################################################
 # read in tree
-s5.tree<-read.nexus(file="../../ASR/Americas/BTV_Americas_s5_no_poly_aln_midpoint_rooted_nexus.tre")
+s5.tree<-read.nexus(file="BTV_Americas_s5_aln_midpoint_root_nexus_REPEAT.tre")
 s5.tree
 
 # read in metadata
-s5.data<-read.csv(file="../../ASR/Americas/A2_Americas_Metadata_No_Polytomy.csv", row.names=1)
+s5.data<-read.csv(file="AIM2_Metadata_Nextstrain_renamed_traits_Americas_2_regions.csv", row.names=1)
 
 # keep only the tips that are found in the tree
 s5.data.subset <- s5.data %>%
@@ -275,11 +277,11 @@ my_legend_order <- c("Outside USA", "USA")
 # plot tree
 #######################################################
 # read in tree
-s6.tree<-read.nexus(file="../../ASR/Americas/BTV_Americas_s6_no_poly_aln_midpoint_rooted_nexus.tre")
+s6.tree<-read.nexus(file="BTV_Americas_s6_aln_midpoint_root_nexus.tre")
 s6.tree
 
 # read in metadata
-s6.data<-read.csv(file="../../ASR/Americas/A2_Americas_Metadata_No_Polytomy.csv", row.names=1)
+s6.data<-read.csv(file="AIM2_Metadata_Nextstrain_renamed_traits_Americas_2_regions.csv", row.names=1)
 
 # keep only the tips that are found in the tree
 s6.data.subset <- s6.data %>%
@@ -327,11 +329,11 @@ legend("bottomleft",
 # plot tree
 #######################################################
 # read in tree
-s7.tree<-read.nexus(file="../../ASR/Americas/BTV_Americas_s7_no_poly_aln_midpoint_rooted_nexus.tre")
+s7.tree<-read.nexus(file="BTV_Americas_s7_aln_midpoint_root_nexus.tre")
 s7.tree
 
 # read in metadata
-s7.data<-read.csv(file="../../ASR/Americas/A2_Americas_Metadata_No_Polytomy.csv", row.names=1)
+s7.data<-read.csv(file="AIM2_Metadata_Nextstrain_renamed_traits_Americas_2_regions.csv", row.names=1)
 
 # keep only the tips that are found in the tree
 s7.data.subset <- s7.data %>%
@@ -346,6 +348,7 @@ s7.trait <- setNames(s7.data.subset[,"trait"], rownames(s7.data.subset))
 unique(s7.trait)
 
 # plotTree(s7.tree,ftype="off",lwd=1,type="phylogram",offset = 0.03,fsize=0.3,x.lim = c(0,20))
+# s7.tree <- ladderize(s7.tree, right = TRUE)
 plot(s7.tree, x.lim = c(0.1,5.75),show.tip.label = FALSE)
 add.scale.bar(x = 0, y = -2, cex = 0.5)
 X<-strsplit(setNames(as.character(s7.trait),names(s7.trait)),"+",
@@ -379,11 +382,11 @@ legend("bottomleft",
 # plot tree
 #######################################################
 # read in tree
-s8.tree<-read.nexus(file="../../ASR/Americas/BTV_Americas_s8_no_poly_aln_midpoint_rooted_nexus.tre")
+s8.tree<-read.nexus(file="BTV_Americas_s8_aln_midpoint_root_nexus.tre")
 s8.tree
 
 # read in metadata
-s8.data<-read.csv(file="../../ASR/Americas/A2_Americas_Metadata_No_Polytomy.csv", row.names=1)
+s8.data<-read.csv(file="AIM2_Metadata_Nextstrain_renamed_traits_Americas_2_regions.csv", row.names=1)
 
 # keep only the tips that are found in the tree
 s8.data.subset <- s8.data %>%
@@ -431,11 +434,11 @@ my_legend_order <- c("Outside USA", "USA")
 # plot tree
 #######################################################
 # read in tree
-s9.tree<-read.nexus(file="../../ASR/Americas/BTV_Americas_s9_no_poly_aln_midpoint_rooted_nexus.tre")
+s9.tree<-read.nexus(file="BTV_Americas_s9_aln_midpoint_root_nexus.tre")
 s9.tree
 
 # read in metadata
-s9.data<-read.csv(file="../../ASR/Americas/A2_Americas_Metadata_No_Polytomy.csv", row.names=1)
+s9.data<-read.csv(file="AIM2_Metadata_Nextstrain_renamed_traits_Americas_2_regions.csv", row.names=1)
 
 # keep only the tips that are found in the tree
 s9.data.subset <- s9.data %>%
@@ -483,11 +486,11 @@ my_legend_order <- c("Outside USA", "USA")
 # plot tree
 #######################################################
 # read in tree
-s10.tree<-read.nexus(file="../../ASR/Americas/BTV_Americas_s10_no_poly_aln_midpoint_rooted_nexus.tre")
+s10.tree<-read.nexus(file="BTV_Americas_s10_aln_midpoint_root_nexus.tre")
 s10.tree
 
 # read in metadata
-s10.data<-read.csv(file="../../ASR/Americas/A2_Americas_Metadata_No_Polytomy.csv", row.names=1)
+s10.data<-read.csv(file="AIM2_Metadata_Nextstrain_renamed_traits_Americas_2_regions.csv", row.names=1)
 
 # keep only the tips that are found in the tree
 s10.data.subset <- s10.data %>%

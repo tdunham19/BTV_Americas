@@ -69,16 +69,29 @@ genogroup_totals <- counts_df %>%
 back_df_counts$genogroup_code <- factor(back_df_counts$genogroup_code, 
                                         levels = genogroup_totals$genogroup_code)
 
+# convert genotype to character
+back_df_counts <- back_df_counts %>%
+  mutate(genogroup_code = as.character(genogroup_code))
+
+# count the number of UNIQUE genotypes per country
+totals <- back_df %>%
+  group_by(country) %>%
+  summarise(count = n_distinct(genogroup_code), .groups = "drop") %>%
+  mutate(genogroup_code = "Total Unique Genotype-codes")
+
+# join the totals into the main df
+back_df_counts <- bind_rows(back_df_counts, totals)
+
 # plot with genogroup totals order and NO COLOR
 ggplot(back_df_counts, aes(x = genogroup_code, y = country)) + 
   geom_tile() + 
   geom_text(aes(label = count), color = "white", size = 3) +
   theme_bw()  +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
-  xlab("Genotype") + ylab("Country") + labs(fill = "Count") + 
-  ggtitle("Genotypes per Country")
+  xlab("Genotype-code") + ylab("Country") + labs(fill = "Count") + 
+  ggtitle("Genotype-codes per Country")
 
-# ggsave("Genogroup_country_heatmap_with_counts_ordered_NOCOLOR_122625.pdf", width=10, height=8, units="in")
+# ggsave("Genogroup_country_heatmap_with_counts_ordered_NOCOLOR_Total_Included_040326.pdf", width=10, height=8, units="in")
 
 #######################################################
 
@@ -99,7 +112,7 @@ parsed_df <- backbone_df %>%
   ungroup()
 
 # read in data from tempest organized by how tree is
-s2_midroot_data <- read.csv("BTV_Americas_s2_aln_midpoint_root_color_by_genogroup_2.fasta_tempest_081525.txt", header = TRUE, sep = "\t")
+s2_midroot_data <- read.csv("./HEATMAP/BTV_Americas_s2_aln_midpoint_root_color_by_genogroup_2.fasta_tempest_081525.txt", header = TRUE, sep = "\t")
 
 # subset data - names only
 s2_midroot_data_subset <- s2_midroot_data[,1, drop=FALSE]
@@ -121,12 +134,12 @@ parsed_df_renamed_s2 %>%
   geom_tile(mapping = aes(fill = genogroup)) +
   geom_tile(color = "black", fill = NA, linewidth = 0.5) +
   scale_x_continuous(breaks = 1:10) + 
-  scale_fill_discrete(name = "BTV-Glue Genogroup") + 
+  scale_fill_discrete(name = "BTV-Glue\nGenogroup") + 
   xlab("Segment") + ylab("Isolate")
 
 # ggsave("BTV_Americas_genogroup_heatmap_s2_treeorder_050225.pdf", height=19, width=15, units="in")
 # ggsave("BTV_Americas_genogroup_heatmap_s2_treeorder_081525.pdf", height=19, width=15, units="in")
-
+# ggsave("BTV_Americas_genogroup_heatmap_s2_treeorder_040926.pdf", height=19, width=15, units="in")
 #######################################################
 
 
@@ -142,7 +155,7 @@ library(ggplot2)
 library(writexl)
 
 # read in data and turn it into a matrix. 
-segment_data <- read.csv("BTV_Americas_cluster_support_matrix_100725_tidy.csv", 
+segment_data <- read.csv("BTV_Americas_cluster_support_matrix_tidy_022726.csv", 
                          row.names = 1, check.names = FALSE)
 segment_matrix <- as.matrix(segment_data)
 
@@ -232,11 +245,37 @@ americas <- subset(world, region %in% c("USA","Brazil","Mexico", "Colombia", "Ar
                                         "Barbados", "Saint Lucia", "Grenada", "Saint Vincent and the Grenadines", 
                                         "Antigua and Barbuda", "Saint Kitts and Nevis", "Dominican Republic"))
 
-country_colors <- c("USA" = "blue", "Barbados" = "red", "Belize" = "red", "Brazil" = "red",
-                    "Costa Rica" = "red", "Cuba" = "red", "Dominican Republic" = "red", "Ecuador" = "red", 
-                    "El Salvador" = "red", "Guatemala" = "red", "Honduras" = "red", "Jamaica" = "red", 
-                    "Martinique" = "red", "Nicaragua" = "red", "Panama" = "red", "Puerto Rico" = "red",
-                    "Trinidad and Tobago" = "red")
+country_colors <- c("USA" = "#564dff", "Barbados" = "#fe6767", "Belize" = "#fe6767", "Brazil" = "#fe6767",
+                    "Costa Rica" = "#fe6767", "Cuba" = "#fe6767", "Dominican Republic" = "#fe6767", "Ecuador" = "#fe6767", 
+                    "El Salvador" = "#fe6767", "Guatemala" = "#fe6767", "Honduras" = "#fe6767", "Jamaica" = "#fe6767", 
+                    "Martinique" = "#fe6767", "Nicaragua" = "#fe6767", "Panama" = "#fe6767", "Puerto Rico" = "#fe6767",
+                    "Trinidad and Tobago" = "#fe6767")
+
+# country_colors <- c("USA" = "grey70", "Barbados" = "grey70", "Belize" = "grey70", "Brazil" = "grey70",
+#                     "Costa Rica" = "grey70", "Cuba" = "grey70", "Dominican Republic" = "grey70", "Ecuador" = "grey70", 
+#                     "El Salvador" = "grey70", "Guatemala" = "grey70", "Honduras" = "grey70", "Jamaica" = "grey70", 
+#                     "Martinique" = "grey70", "Nicaragua" = "grey70", "Panama" = "grey70", "Puerto Rico" = "grey70",
+#                     "Trinidad and Tobago" = "grey70")
+
+
+# color shading
+## red
+"red"
+"#FE0101"
+# 30% lighter
+"#fe4d4d"
+# 40% lighter
+"#fe6767"
+
+## blue
+"#0D01FF"
+# 30% lighter
+"#564dff"
+# 40% lighter
+"#6e67ff"
+
+
+
 
 # read in lat long data
 All_Points <- read_excel("BTV_Americas_Metadata_030425.xlsx", sheet = "All lat long")
@@ -281,6 +320,18 @@ ggplot() +
   coord_fixed(ratio = 1.1, xlim = c(-180, -35)) +
   theme_void()
 
-# ggsave("Americas_map_colored_with_points.pdf", width=7, height=7, units="in")
+# ggsave("Americas_map_colored_with_points_lighter_shading_040326.pdf", width=7, height=7, units="in")
+
+#create plot - WITH NO FILL COLOR - MUST CHANGE country_colors FIRST
+ggplot() + 
+  geom_polygon(data = americas_colored, aes(x = long, y = lat, group = group, fill = fill_color), color = "grey70",  size = 0.2) +
+  geom_point(data = All_Metadata_and_Points, aes(x = long, y = lat), shape = 21, fill = NA, color = "black", size = 1, 
+             alpha = 0.8,position = position_jitter(width = 0.8, height = 0.8)) +
+  # geom_text(data = All_Metadata_and_Points, aes(x = long, y = lat, label = country), hjust = -0.1, vjust = 0, size = 3, check_overlap = TRUE) +  
+  scale_fill_identity() +
+  coord_fixed(ratio = 1.1, xlim = c(-180, -35)) +
+  theme_void()
+
+# ggsave("Americas_map_colored_with_points_no_fill_color_041526.pdf", width=7, height=7, units="in")
 
 #######################################################
